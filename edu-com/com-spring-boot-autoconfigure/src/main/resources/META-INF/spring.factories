@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.clark.daxian.swagger.SwaggerConfig,\
+com.clark.daxian.config.GlobalExceptionHandler

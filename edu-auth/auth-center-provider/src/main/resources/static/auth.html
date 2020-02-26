@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>WeCode获取登录权限</title>
+<script src="js/jquery-1.11.3.min.js"></script>
+<style type="text/css">
+.container {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.input-control {
+	margin: 5px 0;
+}
+
+.input-control label {
+	font-size: 14px;
+	color: #333;
+	width: 30%;
+	text-align: right;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 10px;
+}
+
+.input-control input {
+	width: 30%;
+	height: 30px;
+	padding: 0 5px;
+}
+
+.upload {
+	padding: 30px 50px;
+}
+
+.progress {
+	font-size: 14px;
+}
+
+.progress i {
+	font-style: normal;
+}
+
+.upload-type {
+	color: #666;
+	font-size: 12px;
+	padding: 10px 0;
+}
+
+.upload-type button {
+	margin: 0 10px 0 20px;
+}
+
+.status {
+	font-size: 14px;
+	margin-left: 30px;
+}
+
+.info {
+	font-size: 14px;
+	padding-left: 30px;
+}
+</style>
+</head>
+<body>
+	<h2 style="margin-left: 30%;"><a href="javascript:history.back(-1)">返回</a></h2>
+	<div class="container">
+		<div class="setting">
+			<div class="input-control">
+				<h1 style="margin-left: 30%;">可以通过以下请求获取登录token</h1>
+			</div>
+			<div class="input-control">
+				<label for="timeout">账号</label> <input type="text" id="username" value="13022455262"
+					placeholder="请输入账号">
+			</div>
+
+			<div class="input-control">
+				<label for="partSize">密码</label> <input type="password" value="123456q"
+					class="form-control" id="password" placeholder="请输入密码">
+			</div>
+
+			<div class="input-control">
+				<label for="timeout">client</label>
+				<input type="text" class="form-control" id="client"
+					value="aibrain">
+			</div>
+
+			<div class="input-control">
+				<label for="timeout">secret</label>
+				<input type="text" class="form-control" id="secret" value="weCode">
+			</div>
+
+			<div class="input-control">
+				<input type="hidden" class="form-control" id="grantType"
+					value="password">
+			</div>
+			<div class="input-control">
+				<label for="partSize"></label>
+				<button id="getAuth" class="form-control">获取权限</button>
+			</div>
+			<div class="input-control">
+				<label for="timeout">auth(复制以下auth结果，用于其他接口测试):</label>
+				<textarea rows="15" cols="150" id="authResult"></textarea>
+			</div>
+			<div class="input-control">
+				<label for="partSize">重定向地址:</label> <input type="text" value="https://www.baidu.com"
+														class="form-control" id="redirectUrl" >
+			</div>
+			<div class="input-control">
+				<label for="partSize"></label>
+				<button id="logout" class="form-control">退出当前登录</button>
+			</div>
+		</div>
+
+	</div>
+	<script>
+	$("#getAuth").click(function() {
+		var param = {};
+		param.client_id=$("#client").val();
+		param.client_secret=$("#secret").val();
+		param.username=$("#username").val();
+		param.password=$("#password").val();
+		$.ajax({
+			type : 'post',
+			url : '/auth/login',
+			contentType : "application/x-www-form-urlencoded",
+			data : param,
+			success : function(data) {
+				$("#authResult").val("Bearer " + data.access_token)
+			},
+			error : function(xhr, textStatus, errorThrown) {
+				var code = xhr.status;
+				var message = xhr.statusText;
+				alert(message);
+			}
+		});
+	})
+		$("#logout").click(function(){
+			var param = {};
+			$.ajax({
+				type : 'post',
+				url : '/auth/logout',
+				contentType : "application/x-www-form-urlencoded",
+				beforeSend : function(xhr) {
+					var token = $("#authResult").val();
+					xhr.setRequestHeader("Authorization",token);
+				},
+				success : function(data) {
+					window.location.href=$("#redirectUrl").val();
+				},
+				error : function(xhr, textStatus, errorThrown) {
+					var code = xhr.status;
+					var message = xhr.statusText;
+					alert(message);
+				}
+			});
+		});
+	</script>
+</body>
+</html>

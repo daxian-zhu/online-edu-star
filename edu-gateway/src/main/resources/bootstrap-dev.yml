@@ -1,0 +1,47 @@
+server:
+  port: 8661
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml
+    #开启自动路由
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: auth  #权限
+          uri: lb://oauth2-server
+          order: 0
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1
+  #redis配置
+  redis:
+    host: 127.0.0.1
+    password:
+    port: 6379
+    database: 0
+    timeout: 60000
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8663/pub-key/jwt.json
+edu:
+  security:
+    ignored: |
+      /favicon.ico,
+      /user/v2/api-docs/**,/user/webjars/**,/user/swagger-resources/**,/user/*.html,
+      /auth/login
+    notRole: |
+      /user

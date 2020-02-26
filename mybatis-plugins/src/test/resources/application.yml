@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:8306/wecode_saas_qc?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+    username: write_user
+    password: write@codeus
+#mybatis的配置
+mybatis:
+  type-handlers-package: com.clark.type.hanlder
+  configuration:
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+      map-underscore-to-camel-case: true

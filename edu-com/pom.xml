@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>online-edu</artifactId>
+        <groupId>com.clark.daxian</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>edu-com</artifactId>
+    <packaging>pom</packaging>
+
+    <name>edu-com</name>
+
+    <url>https://github.com/daxian-zhu/online-edu-star</url>
+
+    <description>通用工具模块</description>
+
+    <modules>
+        <module>com-spring-boot-starter</module>
+        <module>com-spring-boot-autoconfigure</module>
+        <module>com-provider-api</module>
+        <module>com-aliyun-service</module>
+        <module>com-wechat-service</module>
+        <module>com-mq-service</module>
+    </modules>
+
+</project>

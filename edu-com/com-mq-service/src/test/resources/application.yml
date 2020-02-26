@@ -1,0 +1,24 @@
+spring:
+  #redis配置
+  redis:
+    host: 127.0.0.1
+    password: redis@2019
+    port: 26379
+    database: 1
+    timeout: 60000
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: wecode_sas
+    password: wecodeSasRabbtimq@codeus
+    virtual-host: wecode_sas
+    # 开启发送确认
+    publisher-confirms: true
+    # 开启发送失败退回
+    publisher-returns: true
+    listener:
+      simple:
+        retry:
+          enabled: false #消费者端的重试
+        acknowledge-mode: manual         # 开启ACK
+        auto-startup: true  #启动时自动启动容器	true

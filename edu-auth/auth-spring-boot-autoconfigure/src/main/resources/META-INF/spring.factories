@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.clark.daxian.auth.resource.config.SecurityConfig,\
+com.clark.daxian.auth.resource.config.RedisConfig,\
+com.clark.daxian.auth.resource.util.PermissionUtil
