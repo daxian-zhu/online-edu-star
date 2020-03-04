@@ -45,6 +45,7 @@ public class TokenUtil implements Serializable {
         }
         HttpServletRequest request = attributes.getRequest();
         String token = request.getHeader(Constant.AUTHORIZATION);
+        token = token.replace("Bearer ", "");
         return getBaseUserByToken(token);
     }
     /**
@@ -59,7 +60,7 @@ public class TokenUtil implements Serializable {
             return JSONObject.parseObject(JSONObject.toJSONString(map)).toJavaObject(BaseUser.class);
         }catch (Exception e){
             log.error("解析token失败:"+e.getMessage());
-            return null;
+            throw new EduException(e.getMessage());
         }
     }
 

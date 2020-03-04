@@ -1,6 +1,5 @@
 package com.clark.daxian.im.netty.handler;
 
-import com.clark.daxian.api.entity.Constant;
 import com.clark.daxian.auth.api.entity.BaseUser;
 import com.clark.daxian.auth.api.util.TokenUtil;
 import com.clark.daxian.im.exception.ImException;
@@ -18,11 +17,11 @@ import io.netty.handler.codec.http.*;
 import io.netty.handler.codec.http.websocketx.WebSocketFrame;
 import io.netty.handler.codec.http.websocketx.WebSocketServerHandshaker;
 import io.netty.handler.codec.http.websocketx.WebSocketServerHandshakerFactory;
+import io.netty.util.AttributeKey;
 import io.netty.util.CharsetUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -32,12 +31,6 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<Object> impl
 
     @Autowired
     private ImProperties imProperties;
-
-    @Autowired
-    private RedisTemplate<String, WebSocketServerHandshaker> serverHandshakerRedisTemplate;
-
-    @Autowired
-    public RedisTemplate<String, ChannelHandlerContext> handlerContextRedisTemplate;
 
     @Autowired
     private TokenCheckService tokenCheckService;
@@ -75,6 +68,8 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<Object> impl
         WebSocketServerHandshakerFactory wsFactory = new WebSocketServerHandshakerFactory(
                 imProperties.getWebsocketUrl(), null, false);
         WebSocketServerHandshaker handshaker = wsFactory.newHandshaker(req);
+        //缓存用户信息
+        ctx.channel().attr(AttributeKey.valueOf(AbstractHandler.USERID)).set(baseUser.getId());
         //处理连接
         dealConnect(baseUser,ctx,handshaker);
 
@@ -92,15 +87,8 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<Object> impl
      * @param handshaker
      */
     private void dealConnect(BaseUser baseUser,ChannelHandlerContext ctx,WebSocketServerHandshaker handshaker){
-        String key = Constant.KEYPER+baseUser.getId();
-        //删除原先存在的连接
-        ChannelHandlerContext oldCtx = handlerContextRedisTemplate.opsForValue().get(key);
-        if(oldCtx!=null) {
-            serverHandshakerRedisTemplate.delete(oldCtx.channel().id().asLongText());
-            handlerContextRedisTemplate.delete(key);
-        }
-        handlerContextRedisTemplate.opsForValue().set(key,ctx);
-        serverHandshakerRedisTemplate.opsForValue().set(ctx.channel().id().asLongText(),handshaker);
+        onlineUserMap.put(String.valueOf(baseUser.getId()),ctx);
+        webSocketHandshakerMap.put(ctx.channel().id().asLongText(),handshaker);
     }
     /**
      * 响应给客户端

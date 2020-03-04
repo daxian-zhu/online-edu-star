@@ -45,10 +45,6 @@ public class Constant {
 	 * 所有的权限
 	 */
 	public static final String ALL = "all";
-	/**
-	 * redis存储前缀
-	 */
-	public static final String KEYPER = "websocket:";
 
 
 }

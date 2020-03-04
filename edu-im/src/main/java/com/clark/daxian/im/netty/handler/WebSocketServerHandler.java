@@ -1,6 +1,5 @@
 package com.clark.daxian.im.netty.handler;
 
-import com.alibaba.fastjson.JSONObject;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

@@ -72,12 +72,7 @@ public class WebSocketListener extends DefaultListener<WsMessage> implements Abs
             redisTemplate.opsForValue().setIfAbsent(content.getId(),"lock",5, TimeUnit.SECONDS);
         }
         logger.info("消息内容:"+ JSONObject.toJSONString(content));
-        Boolean result = false;
-        switch (content.getMessageType()){
-            case SINGLE_SENDING:
-                result = sendMessage(content.getTo());
-                break;
-        }
+        Boolean result = sendMessage(content.getTo(),content.getContent());
         if(result){
             logger.info("发送消息成功");
         }else{

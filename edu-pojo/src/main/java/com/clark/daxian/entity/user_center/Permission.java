@@ -18,9 +18,6 @@ import java.io.Serializable;
 @UserParent
 public class Permission extends BaseEntity implements Serializable {
 
-    public Permission() {
-        System.out.println("=================");
-    }
 
     @Invisiable
     private static final long serialVersionUID = -7559506107525485531L;

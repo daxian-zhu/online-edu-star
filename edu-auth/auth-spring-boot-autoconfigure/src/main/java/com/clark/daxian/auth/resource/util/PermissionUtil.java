@@ -5,6 +5,7 @@ import com.clark.daxian.api.entity.Constant;
 import com.clark.daxian.entity.user_center.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.core.parameters.P;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,16 +82,19 @@ public class PermissionUtil {
         }
         List<Permission> needFindSub = new ArrayList<>();
         for(Permission permission:permissions) {
-            //如果重复，去除
-            if(result.stream().anyMatch(p->p.getId().equals(permission.getId()))){
-                continue;
-            }
             //得到儿子
             List<Permission> subPer =  allPermissions
                     .stream()
                     .filter(desPer->permission.getId().equals(desPer.getParentPermission())).collect(Collectors.toList());
-            result.addAll(subPer);
-            needFindSub.addAll(subPer);
+            //去除儿子中的重复数据
+            for (Permission sub : subPer) {
+                //如果重复，去除
+                if(result.stream().anyMatch(p->p.getId().equals(sub.getId()))){
+                    continue;
+                }
+                result.add(sub);
+                needFindSub.add(sub);
+            }
         }
         if(needFindSub.size()>0) {
             return getAllChild(needFindSub, allPermissions, result);

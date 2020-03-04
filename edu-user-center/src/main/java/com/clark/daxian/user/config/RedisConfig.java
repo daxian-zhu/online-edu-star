@@ -26,7 +26,7 @@ public class RedisConfig {
     public RedisTemplate<String, Permission> permissionRedisTemplate() {
         RedisTemplate<String, Permission> redisTemplate = new RedisTemplate<>();
         redisTemplate.setKeySerializer(new StringRedisSerializer());
-//        redisTemplate.setValueSerializer(new RedisObjectSerializer());
+        redisTemplate.setValueSerializer(new RedisObjectSerializer());
         redisTemplate.setConnectionFactory(redisConnectionFactory);
         return redisTemplate;
     }

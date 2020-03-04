@@ -34,22 +34,4 @@ public class RedisConfig {
         return redisTemplate;
     }
 
-    @Bean
-    public RedisTemplate<String, WebSocketServerHandshaker> serverHandshakerRedisTemplate() {
-        RedisTemplate<String, WebSocketServerHandshaker> redisTemplate = new RedisTemplate<>();
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setValueSerializer(new RedisObjectSerializer());
-        redisTemplate.setConnectionFactory(redisConnectionFactory);
-        return redisTemplate;
-    }
-
-    @Bean
-    public RedisTemplate<String, ChannelHandlerContext> handlerContextRedisTemplate() {
-        RedisTemplate<String, ChannelHandlerContext> redisTemplate = new RedisTemplate<>();
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setValueSerializer(new RedisObjectSerializer());
-        redisTemplate.setConnectionFactory(redisConnectionFactory);
-        return redisTemplate;
-    }
-
 }

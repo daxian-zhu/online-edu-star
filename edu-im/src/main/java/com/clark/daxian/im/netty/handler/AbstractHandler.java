@@ -1,14 +1,19 @@
 package com.clark.daxian.im.netty.handler;
 
 import com.alibaba.fastjson.JSONObject;
+import com.clark.daxian.api.response.ComResponse;
+import com.clark.daxian.im.entity.WsMessage;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.WebSocketServerHandshaker;
+import io.netty.util.AttributeKey;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public interface AbstractHandler {
+
+    String USERID="userId";
     /**
      * 存储websocket的handler，用于共享
      */
@@ -36,9 +41,16 @@ public interface AbstractHandler {
      * @param toUser
      * @return
      */
-    default Boolean sendMessage(Long toUser){
-        ChannelHandlerContext toCtx = onlineUserMap.get(toUser);
-        return false;
+    default Boolean sendMessage(Long toUser, Object message){
+        if(toUser==null||message==null){
+            return false;
+        }
+        ChannelHandlerContext ctx = onlineUserMap.get(String.valueOf(toUser));
+        if(ctx==null){
+            return false;
+        }
+        ctx.channel().writeAndFlush(new TextWebSocketFrame(JSONObject.toJSONString(ComResponse.successResponse(message))));
+        return true;
     }
 
     /**
@@ -55,6 +67,8 @@ public interface AbstractHandler {
      * @param ctx
      */
     default void exit(ChannelHandlerContext ctx){
-
+        webSocketHandshakerMap.remove(ctx.channel().id().asLongText());
+        Long userId = Long.valueOf(ctx.channel().attr(AttributeKey.valueOf(AbstractHandler.USERID)).get().toString());
+        onlineUserMap.remove(userId);
     }
 }
