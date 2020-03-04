@@ -10,6 +10,10 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.oauth2.jwt.Jwt;
 import reactor.core.publisher.Mono;
 
+/**
+ * 上下文使用，获取相关信息
+ * @author 大仙
+ */
 public interface CurrentContent {
 
     /**

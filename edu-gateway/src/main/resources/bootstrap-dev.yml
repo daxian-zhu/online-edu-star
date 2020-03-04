@@ -42,6 +42,7 @@ edu:
     ignored: |
       /favicon.ico,
       /user/v2/api-docs/**,/user/webjars/**,/user/swagger-resources/**,/user/*.html,
+      /im/v2/api-docs/**,/im/webjars/**,/im/swagger-resources/**,/im/*.html,
       /auth/login
     notRole: |
-      /user
+      /user,/user/permission/all

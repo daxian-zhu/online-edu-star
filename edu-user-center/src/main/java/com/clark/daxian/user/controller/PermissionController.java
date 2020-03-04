@@ -69,6 +69,7 @@ public class PermissionController {
 
     /**
      * 权限集合
+     * 用户刷新缓存
      * @return
      */
     @GetMapping("/all")

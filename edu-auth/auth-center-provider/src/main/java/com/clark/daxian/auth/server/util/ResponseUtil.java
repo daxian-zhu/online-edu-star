@@ -18,7 +18,7 @@ import java.io.IOException;
  * 响应工具类
  * @author 大仙
  */
-public interface RsponseUtil<T> {
+public interface ResponseUtil<T> {
 
     /**
      * webflux方式返回

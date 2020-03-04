@@ -5,7 +5,7 @@ import com.clark.daxian.auth.api.entity.TokenEntity;
 import com.clark.daxian.auth.server.exception.AuthException;
 import com.clark.daxian.auth.api.util.TokenUtil;
 import com.clark.daxian.auth.server.properties.AuthServerProperties;
-import com.clark.daxian.auth.server.util.RsponseUtil;
+import com.clark.daxian.auth.server.util.ResponseUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.collections.MapUtils;
 import org.slf4j.Logger;
@@ -34,7 +34,7 @@ import java.util.Map;
  * @Author: 朱维
  * @Date 16:33 2019/11/27
  */
-public class WebfluxLoginAuthSuccessHandler extends WebFilterChainServerAuthenticationSuccessHandler implements RsponseUtil<Map> {
+public class WebfluxLoginAuthSuccessHandler extends WebFilterChainServerAuthenticationSuccessHandler implements ResponseUtil<Map> {
 
     /**
 	 * 配置日志

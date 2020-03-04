@@ -1,6 +1,6 @@
 package com.clark.daxian.auth.server.handler.webflux;
 
-import com.clark.daxian.auth.server.util.RsponseUtil;
+import com.clark.daxian.auth.server.util.ResponseUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
  * @Author: 朱维
  * @Date 1:55 2019/11/28
  */
-public class WebfluxLoginFailureHandler implements ServerAuthenticationFailureHandler, RsponseUtil<String> {
+public class WebfluxLoginFailureHandler implements ServerAuthenticationFailureHandler, ResponseUtil<String> {
 
     @Autowired
     private ObjectMapper objectMapper;

@@ -1,6 +1,6 @@
 package com.clark.daxian.auth.server.handler.web;
 
-import com.clark.daxian.auth.server.util.RsponseUtil;
+import com.clark.daxian.auth.server.util.ResponseUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -16,7 +16,7 @@ import java.io.IOException;
  * @Author: 朱维
  * @Date 1:55 2019/11/28
  */
-public class WebLoginFailureHandler implements AuthenticationFailureHandler, RsponseUtil<String> {
+public class WebLoginFailureHandler implements AuthenticationFailureHandler, ResponseUtil<String> {
 
 
     @Autowired

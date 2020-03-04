@@ -40,6 +40,11 @@
         </dependency>
         <dependency>
             <groupId>com.clark.daxian</groupId>
+            <artifactId>com-mq-service</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.clark.daxian</groupId>
             <artifactId>com-wechat-service</artifactId>
             <version>${project.version}</version>
         </dependency>

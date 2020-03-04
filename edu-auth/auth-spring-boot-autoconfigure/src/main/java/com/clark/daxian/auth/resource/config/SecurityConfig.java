@@ -13,8 +13,8 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 
 
 /**
- * @author Rob Winch
- * @since 5.1
+ * 资源服务器配置
+ * @author 大仙
  */
 @EnableWebFluxSecurity
 public class SecurityConfig {
@@ -39,6 +39,4 @@ public class SecurityConfig {
 		WebfluxReactiveAuthorizationManager webfluxReactiveAuthorizationManager = new WebfluxReactiveAuthorizationManager();
 		return webfluxReactiveAuthorizationManager;
 	}
-
-
 }

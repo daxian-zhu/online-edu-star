@@ -1,5 +1,6 @@
 package com.clark.daxian.entity.base;
 
+import com.clark.daxian.mybatis.annotation.Invisiable;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
@@ -12,6 +13,12 @@ import java.time.LocalDateTime;
  */
 @Data
 public class BaseEntity implements Serializable {
+
+    public BaseEntity() {
+        System.out.println("到底有没有序列化我啊");
+    }
+
+    @Invisiable
     private static final long serialVersionUID = 8316892901228306882L;
     /**
      * 主键Id

@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: im
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml
+  #redis配置
+  redis:
+    host: 127.0.0.1
+    password:
+    port: 6379
+    database: 0
+    timeout: 60000
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+    # 开启发送确认
+    publisher-confirms: true
+    # 开启发送失败退回
+    publisher-returns: true
+    listener:
+      simple:
+        retry:
+          enabled: false #消费者端的重试
+        acknowledge-mode: manual         # 开启ACK
+        auto-startup: true  #启动时自动启动容器	true
+edu:
+  im:
+    port: 8666
+    max-frame-length: 1024
+    idle-read-timeout: 4
+    idle-write-timeout: 5
+    idle-all-timeout: 7
+    websocketUrl: ws://localhost:${edu.im.port}

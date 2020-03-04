@@ -2,11 +2,9 @@ package com.clark.daxian.mq.config;
 
 import com.clark.daxian.api.mq.ProducerService;
 import com.clark.daxian.mq.service.impl.ProducerServiceImpl;
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.DirectExchange;
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @Author: 朱维
@@ -71,6 +69,21 @@ public class RabbitConfig {
     @Bean
     public Binding bindingTest() {
         return BindingBuilder.bind(testQueue()).to(testDirectExchange()).with(TEST_ROUTINGKEY);
+    }
+
+    /**
+     * websocket的交换机
+     */
+    public static final String WEBSOCKET_EX =  "websocket.ex";
+
+    /**
+     * websocket交换机
+     * @return
+     */
+    @Bean
+    public FanoutExchange websocketFanoutExchange(){
+        FanoutExchange fanoutExchange = new FanoutExchange(WEBSOCKET_EX);
+        return fanoutExchange;
     }
 }
 

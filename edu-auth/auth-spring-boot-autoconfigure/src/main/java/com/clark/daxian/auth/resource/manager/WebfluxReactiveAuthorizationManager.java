@@ -30,7 +30,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 自定义授权管理器
+ * 自定义授权管理器，核心配置
+ * @author 大仙
  */
 @Slf4j
 @ConfigurationProperties(prefix = "edu.security")

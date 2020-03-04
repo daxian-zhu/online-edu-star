@@ -1,6 +1,6 @@
 package com.clark.daxian.auth.server.handler.webflux;
 
-import com.clark.daxian.auth.server.util.RsponseUtil;
+import com.clark.daxian.auth.server.util.ResponseUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
  * 退出成功处理逻辑
  * @author 大仙
  */
-public class WebfluxLogoutSuccessHandler implements ServerLogoutSuccessHandler, RsponseUtil<String> {
+public class WebfluxLogoutSuccessHandler implements ServerLogoutSuccessHandler, ResponseUtil<String> {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
