@@ -59,7 +59,8 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<Object> impl
         }
         //处理连接地址，如果需要针对路由进行分发，可以进行处理
         String onlyUrl =UrlUtil.getUrl(uri);
-        if(!onlyUrl.equals("/ws")){
+        if(!onlyUrl.equals("/web/chat")){
+            ctx.channel().attr(AttributeKey.valueOf(AbstractHandler.URL_TYPE)).set("WEB_CHAT");
             throw new ImException("确认路由地址是否正确");
         }
         //获取Token
@@ -69,7 +70,7 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<Object> impl
                 imProperties.getWebsocketUrl(), null, false);
         WebSocketServerHandshaker handshaker = wsFactory.newHandshaker(req);
         //缓存用户信息
-        ctx.channel().attr(AttributeKey.valueOf(AbstractHandler.USERID)).set(baseUser.getId());
+        ctx.channel().attr(AttributeKey.valueOf(AbstractHandler.USER_ID)).set(baseUser.getId());
         //处理连接
         dealConnect(baseUser,ctx,handshaker);
 

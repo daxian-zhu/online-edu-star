@@ -2,7 +2,6 @@ package com.clark.daxian.im.netty.handler;
 
 import com.alibaba.fastjson.JSONObject;
 import com.clark.daxian.api.response.ComResponse;
-import com.clark.daxian.im.entity.WsMessage;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.WebSocketServerHandshaker;
@@ -12,8 +11,14 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public interface AbstractHandler {
-
-    String USERID="userId";
+    /**
+     * 用户信息
+     */
+    String USER_ID="userId";
+    /**
+     * 连接类型
+     */
+    String URL_TYPE = "url_type";
     /**
      * 存储websocket的handler，用于共享
      */
@@ -68,7 +73,7 @@ public interface AbstractHandler {
      */
     default void exit(ChannelHandlerContext ctx){
         webSocketHandshakerMap.remove(ctx.channel().id().asLongText());
-        Long userId = Long.valueOf(ctx.channel().attr(AttributeKey.valueOf(AbstractHandler.USERID)).get().toString());
+        Long userId = Long.valueOf(ctx.channel().attr(AttributeKey.valueOf(AbstractHandler.USER_ID)).get().toString());
         onlineUserMap.remove(userId);
     }
 }

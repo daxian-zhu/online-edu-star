@@ -3,7 +3,7 @@ package com.clark.daxian.test;
 import com.clark.daxian.Run;
 import com.clark.daxian.api.mq.ProducerService;
 import com.clark.daxian.entity.User;
-import com.clark.daxian.mq.annotation.EnableRaabitMq;
+import com.clark.daxian.mq.annotation.EnableRabbitMq;
 import com.clark.daxian.mq.config.RabbitConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Run.class)
 @EnableAutoConfiguration
-@EnableRaabitMq
+@EnableRabbitMq
 public class RunTests {
 
     @Autowired

@@ -29,7 +29,9 @@ public class SendController implements AbstractHandler {
     @PostMapping("/send")
     @ApiOperation(value = "发送消息")
     public ComResponse senMessage(@RequestBody WsMessage wsMessage){
+        //先本地发
         Boolean result = sendMessage(wsMessage.getTo(),wsMessage.getContent());
+        //本地发送失败，广播出去发送
         if(!result){
             producerService.sendMsg(wsMessage, RabbitConfig.WEBSOCKET_EX,null);
             log.info("广播出去");

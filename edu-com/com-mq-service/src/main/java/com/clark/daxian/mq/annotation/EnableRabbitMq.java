@@ -16,5 +16,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Import(RabbitConfig.class)
-public @interface EnableRaabitMq {
+public @interface EnableRabbitMq {
 }

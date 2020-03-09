@@ -1,7 +1,7 @@
 package com.clark.daxian.im;
 
 import com.clark.daxian.im.netty.NettyServer;
-import com.clark.daxian.mq.annotation.EnableRaabitMq;
+import com.clark.daxian.mq.annotation.EnableRabbitMq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -12,7 +12,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * IM服务启动类
  */
 @SpringBootApplication
-@EnableRaabitMq
+@EnableRabbitMq
 @EnableFeignClients
 public class ImApplication implements CommandLineRunner {
 
