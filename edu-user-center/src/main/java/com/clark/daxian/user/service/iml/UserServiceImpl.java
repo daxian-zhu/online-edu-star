@@ -1,14 +1,19 @@
 package com.clark.daxian.user.service.iml;
 
 import com.clark.daxian.api.entity.Constant;
+import com.clark.daxian.dto.user.UserRequest;
 import com.clark.daxian.entity.user_center.User;
 import com.clark.daxian.user.exception.UserException;
 import com.clark.daxian.user.mapper.UserMapper;
 import com.clark.daxian.user.password.BCryptPasswordEncoder;
 import com.clark.daxian.user.service.UserService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 用户业务实现
@@ -64,5 +69,16 @@ public class UserServiceImpl implements UserService {
             throw new UserException("缺失请求参数");
         }
         return userMapper.getByEmail(email);
+    }
+
+    @Override
+    public PageInfo<User> userList(UserRequest params) {
+        Integer page = params.getPage();
+        Integer pageSize = params.getPageSize();
+        //分页处理
+        PageHelper.startPage(page, pageSize, true);
+        List<User> classTimeList = userMapper.userList(params);
+        PageInfo<User> pageInfo = new PageInfo<>(classTimeList);
+        return pageInfo;
     }
 }

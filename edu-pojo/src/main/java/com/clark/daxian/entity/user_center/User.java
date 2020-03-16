@@ -44,5 +44,5 @@ public class User extends BaseEntity implements Serializable {
      * 登录状态
      * 1：允许 0：不允许
      */
-    private Integer loginStatus;
+    private Integer loginStatus = 1;
 }

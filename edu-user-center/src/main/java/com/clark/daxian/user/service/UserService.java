@@ -1,6 +1,10 @@
 package com.clark.daxian.user.service;
 
+import com.clark.daxian.dto.user.UserRequest;
 import com.clark.daxian.entity.user_center.User;
+import com.github.pagehelper.PageInfo;
+
+import java.util.List;
 
 /**
  * 用户业务接口
@@ -35,4 +39,11 @@ public interface UserService {
      * @return
      */
     User getByEmail(String email);
+
+    /**
+     * 获取用户列表
+     * @param userRequest
+     * @return
+     */
+    PageInfo<User> userList(UserRequest userRequest);
 }

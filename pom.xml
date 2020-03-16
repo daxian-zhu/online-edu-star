@@ -20,20 +20,20 @@
     <repositories>
         <repository>
             <id>public</id>
-            <url>http://39.107.96.206:38081/repository/maven-public/</url>
+            <url>http://nexus.oe.com/repository/maven-public/</url>
         </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
             <id>public</id>
-            <url>http://39.107.96.206:38081/repository/maven-public/</url>
+            <url>http://nexus.oe.com/repository/maven-public/</url>
         </pluginRepository>
     </pluginRepositories>
     <!-- 发布jar包地址 -->
     <distributionManagement>
         <repository>
-            <id>weCode</id>
-            <url>http://39.107.96.206:38081/repository/weCode/</url>
+            <id>clark</id>
+            <url>http://nexus.oe.com/repository/clark/</url>
         </repository>
     </distributionManagement>
 
