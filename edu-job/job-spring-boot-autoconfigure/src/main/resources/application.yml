@@ -1,0 +1,9 @@
+#xxl:
+#  job:
+#    admin:
+#      addresses: http://127.0.0.1:8666/xxl-job
+#    executor:
+#      appname: ${spring.application.name}
+#      ip:
+#      port: 9998
+#    accessToken:

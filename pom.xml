@@ -104,5 +104,6 @@
         <module>edu-gateway</module>
         <module>edu-pojo</module>
         <module>edu-im</module>
+        <module>edu-job</module>
     </modules>
 </project>
